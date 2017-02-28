@@ -1,0 +1,22 @@
+{
+  "name": "asdasdwa",
+  "version": "1.0.0",
+  "description": "severside javascript tutorials",
+  "main": "module.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YIRer/nodeJsStudy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "jade": "^1.11.0",
+    "underscore": "^1.8.3"
+  }
+}
