@@ -49,7 +49,7 @@ conn.query(sql, params, function(err, rows, fields){
   }
 });
 
-conn.end()
+conn.end();
 
 //
 // connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
