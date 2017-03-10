@@ -41,12 +41,21 @@ app.get('/cart', function(req,res){
     res.send('Empty!');
   }else{
     var output = '';
-    for(var id in cart){
-      output += `<li>${products[id].title}(${cart[id]})</li>`;
-    }
 
+    for(var id in cart){
+
+      output += `<li>${products[id].title}(${cart[id]})<a href="/del/${id}">del</a></li>`;
+    }
   }
-  res.send(`<h1>Cart</h1><ul>${output}</ul><a href="/products">Product List</a>`)
+  res.send(`<h1>Cart</h1><ul>${output}</ul><a href="/products">Product List</a>`);
+});
+
+app.get('/del/:id',function(req, res){
+  var id = req.params.id;
+  var cart = req.signedCookies.cart;
+  cart[id] = undefined;
+  res.cookie('cart', cart, {signed:true});
+  res.redirect('/cart');
 });
 
 app.get('/count', function(req,res){
