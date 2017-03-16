@@ -98,20 +98,29 @@ app.get('/auth/login', function(req, res){
 // });
 
 passport.serializeUser(function(user, done) {
-
-return  done(null, user.authId);
+  done(null, user.authId);
 });
-
 passport.deserializeUser(function(id, done) {
-  console.log('des'+user.authId);
-  for(var i = 0; i < users.length ; i++){
+  console.log('deserializeUser' + id);
+  for(var i=0; i<users.length; i++){
     var user = users[i];
     if(user.authId === id){
-    return  done(null, user);
+      return done(null, user);
     }
-
   }
 });
+
+// passport.deserializeUser(function(id, done) {
+//   for(var i = 0; i < users.length ; i++){
+//     var user = users[i];
+//
+//     if(user.authId){
+//
+//     }
+//
+//   }
+//   return  done(null, user);
+// });
 passport.use(new LocalStrategy(
   function(username, password, done){
     var nuser = username;
@@ -121,8 +130,7 @@ passport.use(new LocalStrategy(
         if(nuser === user.username){
           return hasher({password:pwd, salt:user.salt}, function(err, pass, salt, hash){
             if(hash === user.password){
-              console.log(user);
-              done(null, user);
+                        done(null, user);
             }else{
               done(null,false);
             }
@@ -139,7 +147,7 @@ passport.use(new FacebookStrategy({
     callbackURL: "/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
+
     var authId = 'facebook:' + profile.id;
     for(var i = 0; i <users.length ; i++){
       var user = users[i];
@@ -151,8 +159,7 @@ passport.use(new FacebookStrategy({
       'authId' : authId,
       'displayName' : profile.displayName
     };
-    users.push();
-    console.log(users);
+    users.push(newUser);
     done(null, newUser);
   }
 ));
@@ -185,7 +192,6 @@ app.get('/auth/facebook/callback',
 );
 
 app.get('/welcome', function(req, res){
-
   if(req.user && req.user.displayName){
     res.send(`
         <h1>Hello, ${req.user.displayName}</h1>
@@ -235,6 +241,7 @@ app.post('/auth/register', function(req, res){
       displayName:req.body.displayName
     };
     users.push(user);
+    console.log(users);
     req.login(user,function(){
       req.session.save(function(){
         res.redirect('/welcome');
@@ -245,6 +252,7 @@ app.post('/auth/register', function(req, res){
 
 app.get('/auth/logout', function(req, res){
   req.logOut();
+  console.log(users);
   req.session.save(function(){
     res.redirect('/welcome');
   });
