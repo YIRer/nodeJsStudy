@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="test.js"></script>
+</head>
+<body>
+  <div ng-app="myApp">
+    <!-- <div ng-controller="myCtrl">
+      <my-directive author="author"></my-directive>
+    </div> -->
+    <!-- <div ng-controller="myCtrl">
+      {{ author.name }}
+      <my-directive author-name="{{ author.name }}"></my-directive>
+    </div> -->
+    <div ng-controller="myCtrl">
+      <text-box on-submit="submit(text, len)"></text-box>
+      <text-box on-submit="submit(text, len)"></text-box>
+    </div>
+    <!-- <div ng-controller="myCtrl">
+      {{ data }}
+    <my-directive></my-directive>
+    </div> -->
+  </div>
+</body>
+</html>

@@ -1,17 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" ng-app="app">
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-  <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
 </head>
-<body ng-app="todo" ng-controller="TodoCtrl">
-  <h1>Todo</h1>
-  <h3>{{ todo.title }}</h3>
-  <input type="text" ng-model="todo.title" />
-  <input type="checkbox" ng-model="todo.completed ">
-  <date>{{ todo.createdAt }}</date>
+<body>
+    <nav class="navbar navbar-inverse" ng-controller="homeController">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="" class="navbar-brand">
+          <span class="glyphicon glyphicon-apple" style="color:#5bdb48;"></span>
+            {{appTitle}}
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="container" ng-controller="GroceryListItemsController">
+    <div class="col-xs-12">
+      <ul class="list-group">
+        <li ng-repeat="item in groceryItems | orderBy: 'date'" class="list-group-item text-center clearfix">
+          <span style="font-weight:bold;">
+            {{item.itemName | uppercase }}
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>-->
+<script type="text/javascript" src="angular_route.js"></script>
+<script type="text/javascript" src="app.js"></script>
 </html>
