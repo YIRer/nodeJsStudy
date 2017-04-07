@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body{
+      margin: 0;
+      background-color: #232323;
+      font-family: "Montserrat", "Avenir";
+    }
+    #container{
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .squre{
+      width: 30%;
+      background-color: purple;
+      padding-bottom: 30%;
+      float:left;
+      margin: 1.66%;
+      border-radius: 15%;
+      transition: background 600ms;
+      -webkit-transition: background 600ms;
+      -moz-transition: background 600ms;
+    }
+    h1{
+      color:white;
+      text-align: center;
+      background-color: steelblue;
+      margin: 0;
+      font-weight: normal;
+      text-transform: uppercase;
+      line-height: 1.1;
+      padding: 20px 0;
+    }
+    #stripe{
+      background-color: white;
+      height: 30px;
+      text-align: center;
+
+    }
+    .selected {
+      color:white;
+      background-color: steelblue;
+    }
+    #displayColor{
+      font-size: 200%;
+    }
+    button{
+      border:none;
+      background: none;
+      text-transform: uppercase;
+      height: 100%;
+      font-weight: 700;
+      color:steelblue;
+      letter-spacing: 1px;
+      font-size: inherit;
+      transition: all 300ms;
+      outline: none;
+    }
+    #message{
+      display: inline-block;
+      width: 20%;
+    }
+    button:hover{
+      color:white;
+      background-color: steelblue;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    Great
+    <br />
+    <span id="displayColor">RGB</span>
+    <br />
+    ColorGame
+  </h1>
+  <div id="stripe">
+    <button id="resetButton" type="button">New Colors</button>
+    <span id="message"></span>
+    <button class="mode" type="button">Easy</button>
+    <button class="mode selected" type="button">Hard</button>
+
+  </div>
+  <div id="container">
+    <div class="squre"></div>
+    <div class="squre"></div>
+    <div class="squre"></div>
+    <div class="squre"></div>
+    <div class="squre"></div>
+    <div class="squre"></div>
+  </div>
+</body>
+<script>
+  var squreNum = 6;
+  var colors = [];
+  var pickedColor;
+  
+  var squres = document.querySelectorAll(".squre");
+  var displayColor = document.querySelector("#displayColor");
+  var message = document.querySelector("#message");
+  var h1 = document.querySelector("h1");
+  var resetButton =  document.querySelector("#resetButton");
+  var modeBtn = document.querySelectorAll(".mode");
+
+  init();
+
+  function reset(){
+    resetButton.textContent = "New Colors";
+    colors = generateRandomColors(squreNum);
+    pickedColor = pickColor();
+    displayColor.textContent = pickedColor;
+    message.textContent = "";
+    for(var i = 0 ; i < squres.length; i++){
+      if(colors[i]){
+        squres[i].style.backgroundColor = colors[i];
+        squres[i].style.display = "block";
+      }else{
+        squres[i].style.display = "none";
+      }
+    }
+    h1.style.backgroundColor = 'steelblue';
+  }
+
+  function changeColor(color){
+    for(var i = 0; i < colors.length; i++){
+      squres[i].style.backgroundColor = color;
+    }
+  }
+  function pickColor(){
+    var random =  Math.floor(Math.random() * colors.length);
+    return colors[random];
+  };
+  function generateRandomColors(num){
+    var arr = [];
+      for(var i = 0 ; i <num; i++){
+        arr.push(randomColor());
+      }
+    return arr;
+  }
+  function randomColor(){
+    var rColor = Math.floor(Math.random() * 256);
+    var gColor = Math.floor(Math.random() * 256);
+    var bColor = Math.floor(Math.random() * 256);
+    return "rgb("+rColor+", "+gColor+", "+bColor+")";
+  }
+  function init(){
+
+    for(var i = 0; i<modeBtn.length ; i++){
+      modeBtn[i].addEventListener("click",function(){
+
+        for(var i = 0; i<modeBtn.length ; i++){
+          modeBtn[i].classList.remove("selected");
+        }
+        this.classList.add("selected");
+        this.textContent === "Easy" ? squreNum = 3: squreNum = 6;
+        reset();
+      });
+    }
+
+    displayColor.textContent = pickedColor;
+
+    resetButton.addEventListener("click",function(){
+      reset();
+    });
+
+    for(var i = 0; i < squres.length ; i++){
+      squres[i].style.backgroundColor = colors[i];
+      squres[i].addEventListener("click",function(){
+        var clickColor = this.style.backgroundColor;
+        if(clickColor === pickedColor){
+          resetButton.textContent = "Play Again?";
+          message.textContent = "Right!";
+          message.style.color = '#232323';
+          changeColor(clickColor);
+          h1.style.backgroundColor = clickColor;
+        }else{
+          this.style.backgroundColor = '#232323';
+          message.textContent = "try Again";
+          message.style.color = '#232323';
+        }
+      },false);
+    }
+    reset();
+  }
+</script>
+</html>
