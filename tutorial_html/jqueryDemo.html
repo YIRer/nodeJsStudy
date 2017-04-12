@@ -1,0 +1,31 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+  <style>
+    div{
+      width: 100px;
+      height: 100px;
+      background-color: teal;
+      float:left;
+      margin:20px;
+    }
+  </style>
+</head>
+<body>
+  <button>click</button>
+  <div>Please don't fade Me!</div>
+  <div>asadf</div>
+  <div>wwwwww</div>
+</body>
+<script>
+  $('button').click(function(){
+    $('div').fadeOut(1000,function(){
+      $(this).remove();
+    });
+
+  });
+</script>
+</html>
