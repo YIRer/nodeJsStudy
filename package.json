@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.16.1",
+    "bootstrap": "^3.3.7",
     "connect-oriento": "^0.1.4",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
