@@ -18,10 +18,6 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
 import { DataStorageService } from './shared/data-storage.service';
-import { SignupComponent } from './auth/signup/signup.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { AuthService } from './auth.service';
-import { AuthGruard } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -35,9 +31,7 @@ import { AuthGruard } from './auth/auth-guard.service';
     ShoppingEditComponent,
     DropdownDirective,
     RecipeStartComponent,
-    RecipeEditComponent,
-    SignupComponent,
-    SigninComponent
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +40,7 @@ import { AuthGruard } from './auth/auth-guard.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService, RecipeService, DataStorageService,AuthService, AuthGruard],
+  providers: [ShoppingListService, RecipeService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
